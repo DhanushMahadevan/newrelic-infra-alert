@@ -1,11 +1,11 @@
 trigger:
-- azure-pipeline
+- az-pipeline
 
 pool:
   vmImage: ubuntu-latest
 
 steps:
 - script: echo testing-pipline 
-  displayName: 'Testing'
+  displayName: 'Testing Pipeline'
 
 
