@@ -4,6 +4,9 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+- group: Newrelic-infra-policy
+
 stages:
 - stage: Plan
   displayName: 'Terraform Plan'
