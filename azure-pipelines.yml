@@ -8,26 +8,6 @@ pool:
   vmImage: 'ubuntu-latest'
 
 stages:
-
-- stage: 'Replacing_Variables_From_ADO_Secrets_to_Terraform_variables'
-  displayName: 'Replacing Variables'
-  jobs:
-  - job: 'Replacing_Variables_From_ADO_Secrets_to_Terraform_variables'
-    steps:
-      - task: replacetokens@5
-        inputs:
-          targetFiles: 'terraform/terraform.tfvars'
-          encoding: 'auto'
-          tokenPattern: 'default'
-          writeBOM: true
-          actionOnMissing: 'warn'
-          keepToken: false
-          actionOnNoFiles: 'continue'
-          enableTransforms: false
-          enableRecursion: false
-          useLegacyPattern: false
-          enableTelemetry: true
-
 - stage: 'Terraform_Plan'
   displayName: 'Terraform Plan'
   jobs:
@@ -48,7 +28,7 @@ stages:
     steps:
     - script: |
         echo "Running Terraform apply..."
-        terraform apply -var-file="terraform.tfvars"
+        terraform apply
       displayName: 'Terraform Apply'
              
               
