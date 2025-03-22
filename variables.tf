@@ -5,8 +5,7 @@ variable "api_key" {
 }
 
 variable "account_id" {
-  default     = 4197589
-"
+  default     = "4197589"
 }
 
 variable "region" {
