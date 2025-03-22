@@ -19,26 +19,16 @@ variables:
 - group: Newrelic-infra-policy
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'
+
 
 stages:
-  - stage: 'BuildBranchName'
-    displayName: 'Build Branch Name'
-    jobs:
-      - job: 'BranchName'
-        variables:
-          buildName: ${{parameters.releaseName}}
-          majorVersion: ${{parameters.major}}
-          minorVersion: ${{parameters.minor}}
-          branchPRNumber: $[counter(variables['System.PullRequest.PullRequestId'], 0)]
-          branchBuildNumber: $[counter(variables['Build.SourceBranch'], 0)]
-        displayName: 'BranchName'
-        steps:
-        - template: 'cicd/templates/buildBranchName.yml'
-  - stage: Test
-    jobs:
-    - job: Test
-      steps:
+
+- stage: 'Replacing_Variables_From_ADO_Secrets_to_Terraform_variables'
+  displayName: 'Replacing Variables'
+  jobs:
+  - job: 'Replacing_Variables_From_ADO_Secrets_to_Terraform_variables'
+    steps:
       - task: replacetokens@5
         inputs:
           targetFiles: 'terraform/terraform.tfvars'
@@ -52,6 +42,32 @@ stages:
           enableRecursion: false
           useLegacyPattern: false
           enableTelemetry: true
+
+- stage: 'Terraform_Plan'
+  displayName: 'Terraform Plan'
+  jobs:
+  - job: 'Terraform_Plan'
+    steps:
+    - script: |
+        echo "Running Terraform init..."
+        terraform init
+        echo "Running Terraform plan..."
+        terraform plan -out=tfplan
+      displayName: 'Terraform Init and Plan'
+          
+        
+- stage: 'Terraform_Apply'
+  displayName: 'Terraform Apply'
+  jobs:
+  - job: 'Terraform_Apply'
+    steps:
+    - script: |
+        echo "Running Terraform apply..."
+        terraform apply -auto-approve tfplan
+      displayName: 'Terraform Apply'
+             
+              
+
 
 
 
