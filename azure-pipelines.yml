@@ -48,7 +48,7 @@ stages:
     steps:
     - script: |
         echo "Running Terraform apply..."
-        terraform apply -auto-approve tfplan
+        terraform apply -var-file="terraform.tfvars"
       displayName: 'Terraform Apply'
              
               
