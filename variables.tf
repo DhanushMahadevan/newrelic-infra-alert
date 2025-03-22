@@ -1,7 +1,6 @@
 ################### NOTE: [ DEFAULT VALUES ARE SURRENDED BY DOUBLE QUOTES] ############################
 
-variable "api_key" {
-  default     =  "$(api_key)"
+variable "API_KEY" {
 }
 
 variable "account_id" {
