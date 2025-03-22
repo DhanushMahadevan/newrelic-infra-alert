@@ -2,11 +2,10 @@
 
 variable "api_key" {
   default     =  "NRAK-LJ7HNM7SEV1JROF9O3T299LSAW3"
-"
 }
 
 variable "account_id" {
-  default     = "4197589
+  default     = "4197589"
 "
 }
 
