@@ -11,9 +11,6 @@ variable "account_id" {
 variable "region" {
   default     = "US" # Your region either US or EU
 }
-variable "entity_name" {
-  default = "az-pipleine-test"  # Must be an exact match to your application name in New Relic
-}
 
 variable "entity_domain" {
   default = "INFRA" # BROWSER, INFRA, MOBILE, SYNTH, depending on your entity's domain
