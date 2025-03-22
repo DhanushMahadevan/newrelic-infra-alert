@@ -1,42 +1,38 @@
 trigger:
 - az-pipeline
 
-variables:
-- group: Newrelic-infra-policy
-
 pool:
   vmImage: 'ubuntu-latest'
 
 stages:
-- stage: 'Terraform_Plan'
+- stage: Plan
   displayName: 'Terraform Plan'
   jobs:
-  - job: 'Terraform_Plan'
+  - job: TerraformPlan
+    displayName: 'Terraform Plan'
     steps:
+    - task: TerraformInstaller@0
+      inputs:
+        terraformVersion: 'latest'
+
     - script: |
-        echo "Running Terraform init..."
-        terraform init
-        echo "Running Terraform plan..."
+        terraform --version
+        terraform init 
         terraform plan -out=tfplan
       displayName: 'Terraform Init and Plan'
-          
-        
-- stage: 'Terraform_Apply'
+
+- stage: Deploy
   displayName: 'Terraform Apply'
   jobs:
-  - job: 'Terraform_Apply'
+  - job: TerraformApply
+    displayName: 'Terraform Apply'
     steps:
+    - task: TerraformInstaller@0
+      inputs:
+        terraformVersion: 'latest'
+
     - script: |
-        echo "Running Terraform apply..."
-        terraform apply
-      displayName: 'Terraform Apply'
-             
-              
-
-
-
-
-
-
-
-
+        terraform --version
+        terraform init
+        terraform apply -auto-approve tfplan 
+      displayName: 'Terraform Init and Apply'
