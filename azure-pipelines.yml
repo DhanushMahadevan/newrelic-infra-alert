@@ -34,5 +34,5 @@ stages:
     - script: |
         terraform --version
         terraform init
-        terraform apply -auto-approve tfplan 
+        terraform apply 
       displayName: 'Terraform Init and Apply'
