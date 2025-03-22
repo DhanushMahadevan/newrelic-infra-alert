@@ -12,14 +12,6 @@ variable "region" {
   default     = "US" # Your region either US or EU
 }
 
-variable "entity_domain" {
-  default = "INFRA" # BROWSER, INFRA, MOBILE, SYNTH, depending on your entity's domain
-}
-
-variable "entity_type" {
-  default = "HOST" # HOST, APPLICATION, etc.,.
-}
-
 variable "policy_name" {
   default = "az-pipeline-test" # Policy name
 }
