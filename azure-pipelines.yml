@@ -34,5 +34,5 @@ stages:
     - script: |
         terraform --version
         terraform init
-        terraform apply -input=false tfplan
+        terraform apply -input=false
       displayName: 'Terraform Init and Apply'
