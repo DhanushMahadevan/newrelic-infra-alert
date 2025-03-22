@@ -1,7 +1,7 @@
 ################### NOTE: [ DEFAULT VALUES ARE SURRENDED BY DOUBLE QUOTES] ############################
 
 variable "api_key" {
-  default     =  "NRAK-LJ7HNM7SEV1JROF9O3T299LSAW3"
+  default     =  "$(api_key)"
 }
 
 variable "account_id" {
