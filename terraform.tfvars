@@ -1,7 +1,7 @@
 ################### NOTE: [ DEFAULT VALUES ARE SURRENDED BY DOUBLE QUOTES] ############################
 
 
-api_key  = #{api_key}#  # Your API_KEY
+api_key  = "#{api_key}#"  # Your API_KEY
 
 account_id  = "4197589" # Your Account_Id
 
