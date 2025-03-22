@@ -12,14 +12,8 @@ parameters:
   displayName: 'Minor version'
   default: 0 
 
-pr: none
 trigger:
-  branches:
-    include:
-    - az-pipeline
-  paths:
-    exclude:
-    - README.md
+- az-pipeline
 
 variables:
 - group: Newrelic-infra-policy
@@ -41,6 +35,25 @@ stages:
         displayName: 'BranchName'
         steps:
         - template: 'cicd/templates/buildBranchName.yml'
+  - stage: Test
+    jobs:
+    - job: Test
+      steps:
+      - task: replacetokens@5
+        inputs:
+          targetFiles: 'terraform/terraform.tfvars'
+          encoding: 'auto'
+          tokenPattern: 'default'
+          writeBOM: true
+          actionOnMissing: 'warn'
+          keepToken: false
+          actionOnNoFiles: 'continue'
+          enableTransforms: false
+          enableRecursion: false
+          useLegacyPattern: false
+          enableTelemetry: true
+
+
 
 
 
