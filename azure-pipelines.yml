@@ -12,8 +12,14 @@ parameters:
   displayName: 'Minor version'
   default: 0 
 
+pr: none
 trigger:
-- az-pipeline
+  branches:
+    include:
+    - az-pipeline
+  paths:
+    exclude:
+    - README.md
 
 variables:
 - group: Newrelic-infra-policy
@@ -35,6 +41,7 @@ stages:
         displayName: 'BranchName'
         steps:
         - template: 'cicd/templates/buildBranchName.yml'
+
 
 
 
