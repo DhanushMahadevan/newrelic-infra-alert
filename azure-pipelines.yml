@@ -23,6 +23,8 @@ stages:
         terraform init 
         terraform plan -out=tfplan
       displayName: 'Terraform Init and Plan'
+      env:
+        api_key: $(api_key)
 
 - stage: Deploy
   displayName: 'Terraform Apply'
