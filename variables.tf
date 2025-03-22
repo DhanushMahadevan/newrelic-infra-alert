@@ -20,6 +20,10 @@ variable "entity_type" {
   default = "HOST" # HOST, APPLICATION, etc.,.
 }
 
+variable "policy_name" {
+  default = "az-pipeline-test" # Policy name
+}
+
 variable "nrql_query" {
 default = "SELECT max(host.cpuPercent) AS 'CPU used %' FROM Metric"
 
