@@ -18,7 +18,7 @@ stages:
     - script: |
         terraform --version
         terraform init 
-        terraform plan -input=false -var "api_key=($API_KEY)"
+        terraform plan 
       displayName: 'Terraform Init and Plan'
 
 - stage: Deploy
@@ -28,5 +28,5 @@ stages:
     displayName: 'Terraform Apply'
     steps:
     - script: |
-        terraform apply -input=false -var "api_key=($API_KEY)" -auto-approve
+        terraform apply -input=false -auto-approve
       displayName: 'Terraform Apply'
