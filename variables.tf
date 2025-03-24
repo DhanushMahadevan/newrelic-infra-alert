@@ -2,7 +2,7 @@
 
 variable "api_key" {
 type = string
-default "NRAK-LJ7HNM7SEV1JROF9O3T299LSAW3"
+default= "NRAK-LJ7HNM7SEV1JROF9O3T299LSAW3"
 }
 
 variable "account_id" {
