@@ -4,8 +4,6 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-variables:
-  mySecretVariable: $(NEWRELIC_API_KEY)
 stages:
 - stage: Plan
   displayName: 'Terraform Plan'
@@ -20,7 +18,7 @@ stages:
     - script: |
         terraform --version
         terraform init 
-        terraform plan -out=tfplan
+        terraform plan -input=fasle -var "api_key=$api_key"
       displayName: 'Terraform Init and Plan'
 
 - stage: Deploy
@@ -30,7 +28,5 @@ stages:
     displayName: 'Terraform Apply'
     steps:
     - script: |
-        terraform --version
-        terraform init
-        terraform apply -input=false -auto-approve
-      displayName: 'Terraform Init and Apply'
+        terraform apply -input=false -var "api_key=$api_key" -auto-approve
+      displayName: 'Terraform Apply'
