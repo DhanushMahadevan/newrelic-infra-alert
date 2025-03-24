@@ -5,8 +5,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-- group: Newrelic-infra-policy
-
+  mySecretVariable: $(NEWRELIC_API_KEY)
 stages:
 - stage: Plan
   displayName: 'Terraform Plan'
@@ -23,8 +22,6 @@ stages:
         terraform init 
         terraform plan -out=tfplan
       displayName: 'Terraform Init and Plan'
-      env:
-        api_key: $(api_key)
 
 - stage: Deploy
   displayName: 'Terraform Apply'
