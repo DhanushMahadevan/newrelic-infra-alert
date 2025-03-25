@@ -14,20 +14,14 @@ stages:
     - task: TerraformInstaller@0
       inputs:
         terraformVersion: 'latest'
-
-    - script: |
-        terraform --version
-        terraform init 
-        terraform plan 
-      displayName: 'Terraform Init and Plan'
-
-- stage: Deploy
-  displayName: 'Terraform Apply'
-  jobs:
-  - job: TerraformApply
-    displayName: 'Terraform Apply'
-    steps:
-    - script: |
-        terraform init    
-        terraform apply -input=false -auto-approve
-      displayName: 'Terraform Init and Apply'
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          export TF_VAR_api_key="$(project_id)"
+          export TF_VAR_account_id="(account_id)"
+          terraform --version
+          terraform init 
+          terraform plan 
+          terraform apply -input=false -auto-approve
+      displayName: 'Terraform Init,Plan and Apply'
