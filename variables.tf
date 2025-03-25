@@ -5,7 +5,7 @@ type = string
 }
 
 variable "account_id" {
-  type =number
+  type = number
 }
 
 variable "region" {
