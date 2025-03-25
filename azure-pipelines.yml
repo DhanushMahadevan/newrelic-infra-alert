@@ -22,5 +22,15 @@ stages:
           terraform --version
           terraform init 
           terraform plan 
-          terraform apply -input=false -auto-approve
-      displayName: 'Terraform Init,Plan and Apply'
+      displayName: 'Terraform Init and Plan'
+      
+- stage: Deploy
+  displayName: 'Terraform Apply'
+  jobs:
+  - job: TerraformApply
+    displayName: 'Terraform Apply'
+    steps:
+    - script: |
+        terraform init
+        terraform apply -input=false -auto-approve
+      displayName: 'Terraform Init and Apply'
