@@ -5,6 +5,22 @@ pool:
   vmImage: 'ubuntu-latest'
 
 stages:
+
+- stage: validate
+  displayName: 'Terraform validate'
+  jobs:
+  - job: TerraformValidate
+    displayName: 'Terraform validate'
+    steps:
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          export TF_VAR_api_key="$(api_key)"
+          terraform init
+          terraform validate 
+      displayName: 'Terraform validate'
+
 - stage: Plan
   displayName: 'Terraform Plan'
   jobs:
@@ -30,7 +46,11 @@ stages:
   - job: TerraformApply
     displayName: 'Terraform Apply'
     steps:
-    - script: |
-        terraform init
-        terraform apply -input=false -auto-approve
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          export TF_VAR_api_key="$(api_key)"
+          terraform init
+          terraform apply -input=false -auto-approve
       displayName: 'Terraform Init and Apply'
