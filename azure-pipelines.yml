@@ -18,7 +18,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          export TF_VAR_api_key="$(project_id)"
+          export TF_VAR_api_key="$(api_key)"
           export TF_VAR_account_id="(account_id)"
           terraform --version
           terraform init 
